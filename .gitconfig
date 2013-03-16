@@ -76,5 +76,6 @@
 [url "git://gist.github.com/"]
 	insteadOf = "gist:"
 
-[push]
-	default = simple
+[user]
+	name = shashwat
+	email = shashwat@flipkart.com

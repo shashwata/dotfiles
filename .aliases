@@ -10,12 +10,12 @@ alias -- -="cd -"
 alias d="cd ~/Documents/Dropbox"
 alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
-alias p="cd ~/Projects"
+alias p="cd /Volumes/Sources"
 alias g="git"
 alias h="history"
 alias j="jobs"
 alias v="vim"
-alias m="mate ."
+#alias m="mate ."
 alias s="subl ."
 alias o="open"
 alias oo="open ."
@@ -31,7 +31,7 @@ fi
 alias l="ls -l ${colorflag}"
 
 # List all files colorized in long format, including dot files
-alias la="ls -la ${colorflag}"
+alias ll="ls -la ${colorflag}"
 
 # List only directories
 alias lsd='ls -l ${colorflag} | grep "^d"'
@@ -130,3 +130,9 @@ done
 alias stfu="osascript -e 'set volume output muted true'"
 alias pumpitup="osascript -e 'set volume 7'"
 alias hax="growlnotify -a 'Activity Monitor' 'System error' -m 'WTF R U DOIN'"
+
+alias hdfs="hadoop dfs"
+
+#alias mvn='$HOME/source/scripts/mvn-growl.sh -DdownloadJavadocs=true  -DdownloadSources=true'
+#alias svn='$HOME/source/scripts/svn-growl.sh'
+

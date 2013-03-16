@@ -37,3 +37,15 @@ complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes Syste
 
 # If possible, add tab completion for many more commands
 [ -f /etc/bash_completion ] && source /etc/bash_completion
+
+export JAVA_HOME=$(/usr/libexec/java_home)
+export SSH_CMD=$(which ssh)
+
+function ssh {
+    host=$1
+    shift
+    $SSH_CMD $host -t screen -DR $USER"$@"
+}
+
+export function ssh;
+export CLICOLOR=1
