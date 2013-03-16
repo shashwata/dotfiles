@@ -9,7 +9,7 @@ fi
 cd "$(dirname "${BASH_SOURCE}")"
 git pull
 function doIt(){
-	rsync -v -e ssh --exclude ".git*" --exclude ".DS_Store" --exclude "bootstrap.sh" --exclude "README.md" --exclude "__old" --exclude ".bashrc" --exclude ".extra" -a . $USER@$host:~
+	rsync -v -e ssh --exclude ".git*" --exclude ".DS_Store" --exclude "bootstrap.sh" --exclude "README.md" --exclude "__old" --exclude ".bashrc" --exclude ".extra" --exclude "init" --exclude ".osx" -a . $USER@$host:~
 }
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then

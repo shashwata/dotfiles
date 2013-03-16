@@ -33,14 +33,11 @@ done
 complete -W "NSGlobalDomain" defaults
 
 # Add `killall` tab completion for common apps
-complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall
+#complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall
 
 # If possible, add tab completion for many more commands
 [ -f /etc/bash_completion ] && source /etc/bash_completion
-
-if [ -x "/usr/libexec/java_home" ] ; then
-    export JAVA_HOME=$(/usr/libexec/java_home)
-fi
+[ -f /opt/local/etc/bash_completion ] && source /opt/local/etc/bash_completion
 
 if [ -e $HOME/.local_dev_box ] ; then
     export SSH_CMD=$(which ssh)
