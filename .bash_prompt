@@ -45,7 +45,7 @@ export RESET
 
 function parse_git_dirty() {
 	#[[ $(git status 2> /dev/null | tail -n1) != *"working directory clean"* ]] && echo "*"
-	if [ ! git diff --quiet 2>/dev/null >&2 ] && echo "*"
+	[ ! git diff --quiet 2>/dev/null >&2 ] && echo "*"
 }
 
 function parse_git_branch() {
