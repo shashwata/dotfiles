@@ -44,7 +44,7 @@ if [ -e $HOME/.local_dev_box ] ; then
     function ssh {
         host=$1
         shift
-        $SSH_CMD $host -t screen -x $USER "$@"
+        $SSH_CMD $host -t screen -xRR $USER "$@"
     }
 
     export function ssh;
