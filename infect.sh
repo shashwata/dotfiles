@@ -64,7 +64,6 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
 fi
 
 cd "$(dirname "${BASH_SOURCE}")"
-git pull
 
 for i in "${hosts[@]}" ; do
     pushToHost $i
