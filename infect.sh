@@ -13,7 +13,7 @@ function doIt(){
     host=$1
     echo "Updating host: $host"
 	rsync -v -e ssh --exclude ".git*" --exclude ".DS_Store" --exclude "bootstrap.sh" --exclude "README.md" --exclude "__old" --exclude ".bashrc" --exclude ".extra" --exclude "init" --exclude ".osx" -a . $USER@$host:~
-    ssh $USER@$host [ -e ~/bashrc ] && mv .bashrc .bashrc_old
+    ssh $USER@$host [ -e ~/.bashrc ] && mv -n .bashrc .bashrc_old
     rsync -v .bashrc $USER@$host:~
 }
 
