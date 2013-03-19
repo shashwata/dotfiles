@@ -2,7 +2,8 @@
 infected_host_db="$HOME/.infected"
 mkdir -p $infected_host_db
 
-if [ "x$1" == "--force" -o "$1" == "-f" ] ; then
+if [ "x$1" == "x--force" -o "x$1" == "x-f" ] ; then
+    echo "Forcing updates"
     force=true
     shift
 else
@@ -40,7 +41,7 @@ function require_push() {
 
 function pushToHost() {
     if [ $force == true ] ; then
-        doIt $host
+        doIt $1
     else
         require_push $1
     fi
