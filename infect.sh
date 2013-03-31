@@ -12,10 +12,25 @@ fi
 
 function doIt(){
     host=$1
+    ssh_key_file="$HOME/.ssh/id_rsa.pub"
     echo "Updating host: $host"
-	rsync -v -e ssh --exclude ".git*" --exclude ".DS_Store" --exclude "bootstrap.sh" --exclude "README.md" --exclude "__old" --exclude ".bashrc" --exclude ".extra" --exclude "init" --exclude ".osx" -a . $USER@$host:~
+    if [ -e ${ssh_key_file} ] ; then
+        ssh_key=$(cat ${ssh_key_file})
+        auth_key_file="~/.ssh/authorized_keys"
+        /usr/bin/ssh $USER@$host "touch ${auth_key_file} ; ! grep -q $(echo ${ssh_key} | awk '{print $2}') ${auth_key_file}  && echo ${ssh_key} >> ${auth_key_file} "
+    fi
     /usr/bin/ssh $USER@$host '[ -e ~/.bashrc ] && mv -n ~/.bashrc ~/.bashrc_old'
-    rsync -v .bashrc $USER@$host:~
+    rsync -v -e ssh --exclude ".git*" --exclude ".DS_Store" --exclude "bootstrap.sh" --exclude "README.md" --exclude "__old" --exclude ".extra" --exclude "init" --exclude ".osx" --exclude "infect.sh" --exclude ".brew" --exclude ".ssh" -a . $USER@$host:~
+}
+
+function validHostPing() {
+    host=$1
+    ping -o -t 2 -q -Q pf-eng2 &> /dev/null && echo 1
+}
+
+function validHostHostCheck() {
+    host=$1
+    host $host &> /dev/null && echo 1
 }
 
 function require_push() {
@@ -23,7 +38,7 @@ function require_push() {
     host_db="$infected_host_db/$host"
     touch "$host_db"
     
-    if ! host $host > /dev/null ; then
+    if [ "x$(validHostPing $host)" != "x1" ] ; then
         echo "Invalid host: $host"
         exit 2
     fi
