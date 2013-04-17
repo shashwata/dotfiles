@@ -17,7 +17,7 @@ function doIt(){
     if [ -e ${ssh_key_file} ] ; then
         ssh_key=$(cat ${ssh_key_file})
         auth_key_file="~/.ssh/authorized_keys"
-        /usr/bin/ssh $USER@$host "mkdir -p ~/.ssh; touch ${auth_key_file} ; ! grep -q $(echo ${ssh_key} | awk '{print $2}') ${auth_key_file}  && echo ${ssh_key} >> ${auth_key_file} "
+        /usr/bin/ssh $USER@$host "mkdir -p ~/.ssh; touch ${auth_key_file} ; ! grep -q $(echo ${ssh_key} | awk '{print $2}') ${auth_key_file} && echo ${ssh_key} >> ${auth_key_file} ; echo 'Done configuring auth keys'"
     fi
     /usr/bin/ssh $USER@$host '[ -e ~/.bashrc ] && mv -n ~/.bashrc ~/.bashrc_old'
     rsync -v -e ssh --exclude "bin" --exclude ".git*" --exclude ".DS_Store" --exclude "bootstrap.sh" --exclude "README.md" --exclude "__old" --exclude ".extra" --exclude "init" --exclude ".osx" --exclude "infect.sh" --exclude ".brew" -a . $USER@$host:~
