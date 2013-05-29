@@ -50,11 +50,13 @@ if [ -e $HOME/.local_dev_box ] ; then
     export function ssh;
 else
     ssh_session_var_file="$HOME/.ssh/.ssh_session_vars.rc"
-    alias fix_ssh_session='[ -e $ssh_session_vars ] && source $ssh_session_vars'
     function ssh {
         host=$1
         shift
-        fix_ssh_session
+        if [ -e $ssh_session_var_file ] ; then
+            source $ssh_session_var_file
+        fi
+
         $SSH_CMD $host -t bash ./.ssh_capture_session
     }
 
