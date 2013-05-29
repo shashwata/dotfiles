@@ -49,12 +49,8 @@ if [ -e $HOME/.local_dev_box ] ; then
 
     export function ssh;
 else
-    if [ -e $HOME/.ssh_capture_session ] ; then
-        $HOME/.ssh_capture_session
-    fi
-
-    ssh_session_var_file="$HOME/.ssh/.ssh_session_vars.rc"
     function ssh {
+        ssh_session_var_file="$HOME/.ssh/.ssh_session_vars.rc"
         host=$1
         shift
         if [ -e $ssh_session_var_file ] ; then
