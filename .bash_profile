@@ -39,8 +39,8 @@ complete -W "NSGlobalDomain" defaults
 [ -f /etc/bash_completion ] && source /etc/bash_completion
 [ -f /opt/local/etc/bash_completion ] && source /opt/local/etc/bash_completion
 
+export SSH_CMD=$(which ssh)
 if [ -e $HOME/.local_dev_box ] ; then
-    export SSH_CMD=$(which ssh)
     function ssh {
         host=$1
         shift
@@ -49,8 +49,16 @@ if [ -e $HOME/.local_dev_box ] ; then
 
     export function ssh;
 else
-    alias fix_ssh_session='source $HOME/.ssh/.ssh_session_vars.rc'
-    alias ssh='fix_ssh_session; ssh'
+    ssh_session_var_file="$HOME/.ssh/.ssh_session_vars.rc"
+    alias fix_ssh_session='[ -e $ssh_session_vars ] && source $ssh_session_vars'
+    function ssh {
+        host=$1
+        shift
+        fix_ssh_session
+        $SSH_CMD $host -t bash ./.ssh_capture_session
+    }
+
+    export function ssh;
 fi
 
 export CLICOLOR=1
