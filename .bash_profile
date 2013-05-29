@@ -44,13 +44,13 @@ if [ -e $HOME/.local_dev_box ] ; then
     function ssh {
         host=$1
         shift
-        $SSH_CMD $host -t ./.run_screen_remote
+        $SSH_CMD $host -t bash ./.run_screen_remote
     }
 
     export function ssh;
 else
-    alias fixssh='source $HOME/.ssh/.ssh_session_vars.rc'
-    alias ssh='fixssh; ssh'
+    alias fix_ssh_session='source $HOME/.ssh/.ssh_session_vars.rc'
+    alias ssh='fix_ssh_session; ssh'
 fi
 
 export CLICOLOR=1
