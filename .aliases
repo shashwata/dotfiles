@@ -133,6 +133,4 @@ alias hax="growlnotify -a 'Activity Monitor' 'System error' -m 'WTF R U DOIN'"
 
 alias hdfs="hadoop dfs"
 
-#alias mvn='$HOME/source/scripts/mvn-growl.sh -DdownloadJavadocs=true  -DdownloadSources=true'
-#alias svn='$HOME/source/scripts/svn-growl.sh'
 

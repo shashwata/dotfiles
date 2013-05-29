@@ -1,0 +1,5 @@
+#/bin/bash
+
+$HOME/.ssh_capture_env
+screen -xRR $USER "$@"
+
