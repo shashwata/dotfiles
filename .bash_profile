@@ -50,7 +50,14 @@ if [ -e $HOME/.local_dev_box ] ; then
     export function ssh;
 else
     screen_cmd=$(which screen)
-    alias screen="$HOME/.ssh_capture_session.sh; $screen_cmd"
+    function screen {
+        if [ -x "$HOME/.ssh_capture_session" ] ; then
+            $HOME/.ssh_capture_session
+        fi
+        $screen_cmd "$@"
+    }
+    export screen
+
     function ssh {
         ssh_session_var_file="$HOME/.ssh/.ssh_session_vars.rc"
         host=$1
