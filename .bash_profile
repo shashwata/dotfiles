@@ -44,11 +44,13 @@ if [ -e $HOME/.local_dev_box ] ; then
     function ssh {
         host=$1
         shift
-        $SSH_CMD $host -t bash ./.run_screen_remote
+        $SSH_CMD $host -t "screen -xRR $USER"
     }
 
     export function ssh;
 else
+    screen_cmd=$(which screen)
+    alias screen="$HOME/.ssh_capture_session.sh; $screen_cmd"
     function ssh {
         ssh_session_var_file="$HOME/.ssh/.ssh_session_vars.rc"
         host=$1
