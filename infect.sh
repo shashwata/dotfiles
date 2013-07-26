@@ -25,7 +25,7 @@ function doIt(){
 
 function validHostPing() {
     host=$1
-    ping -o -t 2 -q -Q pf-eng2 &> /dev/null && echo 1
+    ping -o -t 2 -q -Q $host &> /dev/null && echo 1
 }
 
 function validHostHostCheck() {
