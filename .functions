@@ -206,7 +206,7 @@ function check_local_prod() {
         hostname=$(hostname -f)
         FK_ENV_FILE="$HOME/.fk_env"
         if [ ! -e $FK_ENV_FILE ] ; then
-            wget -O $FK_ENV_FILE "https://hostdb.nm.flipkart.com/cgi-bin/hostdb.fcgi?action=getParents&namespace=tags&host=${hostname}"
+            wget -q -O $FK_ENV_FILE "https://hostdb.nm.flipkart.com/cgi-bin/hostdb.fcgi?action=getParents&namespace=tags&host=${hostname}"
         fi
 
         tags="$(cat $FK_ENV_FILE)"
