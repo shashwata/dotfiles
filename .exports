@@ -19,5 +19,4 @@ export LESS_TERMCAP_md="$ORANGE"
 # export MANPAGER="less -X"
 
 export LOCAL_DEV_BOX="$([ -e $HOME/.local_dev_box ] && echo local)"
-export FK_ENV=$(check_local_prod)
 
