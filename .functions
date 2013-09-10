@@ -209,7 +209,7 @@ function check_local_prod() {
             wget -q -O $FK_ENV_FILE "https://hostdb.nm.flipkart.com/cgi-bin/hostdb.fcgi?action=getParents&namespace=tags&host=${hostname}"
         fi
 
-        tags="$(cat $FK_ENV_FILE)"
+        tags="$(cat $FK_ENV_FILE | tr '\n' ' ')"
         case "$tags" in
             .*stage.* | .*staging.*) echo "STAGE"
                 ;;
