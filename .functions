@@ -202,7 +202,7 @@ function unquarantine() {
 function check_local_prod() {
     if [ "x$LOCAL_DEV_BOX" != "x" ] ; then 
         echo "LOCAL"
-    elif [ -e "/etc/default/fk-env" ] 
+    elif [ -e "/etc/default/fk-env" ] ; then
         cat /etc/default/fk-env
     else
         hostname=$(hostname -f)
