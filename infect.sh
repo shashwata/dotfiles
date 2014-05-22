@@ -40,7 +40,7 @@ function require_push() {
     
     if [ "x$(validHostPing $host)" != "x1" ] ; then
         echo "Invalid host: $host"
-        exit 2
+        return 2
     fi
 
     host_version=$(cat $host_db)
@@ -82,6 +82,6 @@ fi
 cd "$(dirname "${BASH_SOURCE}")"
 
 for i in "${hosts[@]}" ; do
-    pushToHost $i
+    pushToHost $i || ( echo "retrying host: $i"; pushToHost $i ) || echo "Unable to update host: $i"
 done
 
