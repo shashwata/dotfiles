@@ -42,9 +42,7 @@ complete -W "NSGlobalDomain" defaults
 export SSH_CMD=$(which ssh)
 if [ -e $HOME/.local_dev_box ] ; then
     function ssh {
-        host=$1
-        shift
-        $SSH_CMD $host -t 'bash -i -c "screen -xRR \$USER"'
+        $SSH_CMD $@ -t 'bash -i -c "screen -xRR \$USER"'
     }
 
     export function ssh;
