@@ -58,13 +58,11 @@ else
 
     function ssh {
         ssh_session_var_file="$HOME/.ssh/.ssh_session_vars.rc"
-        host=$1
-        shift
         if [ -e $ssh_session_var_file ] ; then
             source $ssh_session_var_file
         fi
 
-        $SSH_CMD $host
+        $SSH_CMD $@
     }
 
     export function ssh;
