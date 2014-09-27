@@ -12,15 +12,8 @@ fi
 
 function doIt(){
     host=$1
-    ssh_key_file="$HOME/.ssh/id_rsa.pub"
-    echo "Updating host: $host"
-    if [ -e ${ssh_key_file} ] ; then
-        ssh_key=$(cat ${ssh_key_file})
-        auth_key_file="~/.ssh/authorized_keys"
-        /usr/bin/ssh $USER@$host "mkdir -p ~/.ssh; touch ${auth_key_file} ; ! grep -q $(echo ${ssh_key} | awk '{print $2}') ${auth_key_file} && echo ${ssh_key} >> ${auth_key_file} ; echo 'Done configuring auth keys'"
-    fi
     /usr/bin/ssh $USER@$host '[ -e ~/.bashrc ] && mv -n ~/.bashrc ~/.bashrc_old'
-    rsync -v -e ssh --exclude "bin" --exclude ".git*" --exclude ".DS_Store" --exclude "bootstrap.sh" --exclude "README.md" --exclude "__old" --exclude ".extra" --exclude "init" --exclude ".osx" --exclude "infect.sh" --exclude ".brew" -a . $USER@$host:~
+    rsync -v -e ssh --exclude "bin" --exclude ".git*" --exclude ".DS_Store" --exclude "bootstrap.sh" --exclude "README.md" --exclude "__old" --exclude ".extra" --exclude "init" --exclude ".osx" --exclude "infect.sh" --exclude ".brew" --exclude add_auth.sh -a . $USER@$host:~
 }
 
 function validHostPing() {
@@ -80,6 +73,8 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
 fi
 
 cd "$(dirname "${BASH_SOURCE}")"
+
+$(dirname $0)/add_auth.sh ${hosts[@]}
 
 for i in "${hosts[@]}" ; do
     pushToHost $i || ( echo "retrying host: $i"; pushToHost $i ) || echo "Unable to update host: $i"
