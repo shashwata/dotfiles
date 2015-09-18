@@ -41,11 +41,11 @@ complete -W "NSGlobalDomain" defaults
 
 export SSH_CMD=$(which ssh)
 if [ -e $HOME/.local_dev_box ] ; then
-    function ssh {
+    function ssh_scr {
         $SSH_CMD $@ -t 'bash -i -c "screen -xRR \$USER"'
     }
 
-    export function ssh;
+    export function ssh_scr;
 else
     screen_cmd=$(which screen)
     function screen {
@@ -56,7 +56,7 @@ else
     }
     export screen
 
-    function ssh {
+    function ssh_scr {
         ssh_session_var_file="$HOME/.ssh/.ssh_session_vars.rc"
         if [ -e $ssh_session_var_file ] ; then
             source $ssh_session_var_file
@@ -65,7 +65,7 @@ else
         $SSH_CMD $@
     }
 
-    export function ssh;
+    export function ssh_scr;
 fi
 
 export CLICOLOR=1
